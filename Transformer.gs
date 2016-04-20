@@ -7,7 +7,9 @@
 
 var transformer = {
 		simpleRow: function(contactJson) {
-			return [contactJson['Id'], contactJson['FullName'], contactJson['PrimaryEmail'], 
-			        contactJson['Phones'],JSON.stringify(contactJson)];
+			var emails = contactJson['Emails'].map( function(x){return x['Address'];} ).join(';');
+			var phones = contactJson['Phones'].map( function(x){return x['number']; } ).join(';');
+			return [contactJson['Id'], contactJson['FullName'], emails, 
+			        phones,JSON.stringify(contactJson)];
 		}
 };

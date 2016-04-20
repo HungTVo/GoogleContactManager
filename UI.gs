@@ -11,7 +11,7 @@
  * Builder a trigger and attach to Spreadsheet gave by configure
  */
 function setupCustomMenu() {
-	//config.init();
+	// config.init();
 	var sheet = SpreadsheetApp.openById(sid['sid']);
 	ScriptApp.newTrigger("onOpen").forSpreadsheet(sheet).onOpen().create();
 }
@@ -23,13 +23,19 @@ function onOpen() {
 	var ui = SpreadsheetApp.getUi();
 	ui.createMenu('Contact manager').addItem('Export contacts',
 			'exportContacts').addItem('Import or Update contacts', 'ni')
+			.addItem('Remove contacts', 'ni')
 			.addSeparator().addSubMenu(
 					ui.createMenu('Merge').addItem('Check to merge', 'ni')
 							.addItem('Merge', 'ni')).addSubMenu(
 					ui.createMenu('Clean').addItem('Contacts sheet',
 							'cleanContactsSheet').addItem('Merge sheet', 'ni')
 							.addItem('import sheet', 'ni')).addSubMenu(
-					ui.createMenu('Nomalize').addItem('Phone number', 'ni') // remove +84 if have, add -
+					ui.createMenu('Nomalize').addItem('Phone number', 'ni') // remove
+																			// +84
+																			// if
+																			// have,
+																			// add
+																			// -
 					.addItem('Name', 'ni') // update name infor
 					.addItem('--', 'ni')).addToUi();
 }

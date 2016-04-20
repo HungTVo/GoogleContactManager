@@ -12,8 +12,6 @@ function runTest() {
 	for (i in configTest)
 		configTest[i]();
 }
-function test() {
-}
 
 var sheetUtilsTest = {
 	testSheetUtils_1 : function() {
