@@ -10,11 +10,18 @@ var config = {
   // Spreadsheet and sheet information
   'sid': '16s8OUJPlTkX6sQDU4CeYAlOfI0QfGiJctfzEncLi33w', // undefined
   'contactSheetName': 'contacts',
+  'defaultSheetName': 'tmp',
   
+  /**
+   * Must be call before use config
+   */
   init: function() {
     if (this.sid == undefined) {
       this.sid = SpreadsheetApp.getActiveSpreadsheet().getId();
     }
   }
 };
+
+// first call to init
+config.init();
 

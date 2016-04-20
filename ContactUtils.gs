@@ -10,27 +10,29 @@ function exportContacts() {
   var contacts = ContactsApp.getContacts();
   
   var cc = 1;
-  var arr = [];
-  config.init();
+  //var arr = [];
+  //config.init();
   
-  var sheetUtils = new SheetUtils(config['sid']);
+  var sheetUtils = new SheetUtils(config['sid'], 'contacts');
   
   for (i in contacts) {
     var js = contact2json(contacts[i]);
-    var row = [js['Id'], js['FullName'], js['PrimaryEmail'], js['Phones'],JSON.stringify(js)];
-    //insertRow(row);    
-    arr.push(row);
-    if (arr.length > 100) {
-      sheetUtils.insertRows(arr);
-      arr = [];
-    }
+    //var row = [js['Id'], js['FullName'], js['PrimaryEmail'], js['Phones'],JSON.stringify(js)];
+    var row = transformer['simpleRow'](js);
+    //arr.push(row);
+    sheetUtils.insertRowBuffer(row);
+//    if (arr.length > 100) {
+//      sheetUtils.insertRows(arr);
+//      arr = [];
+//    }
     //if (cc > 100) break; cc++;
   }
-  if (arr.length > 0)
-    sheetUtils.insertRows(arr);
+//  if (arr.length > 0)
+//    sheetUtils.insertRows(arr);
+  sheetUtils.flush();
 }
 
-// json
+// json  TODO
 function insertOrUpdate(jsonContact) {
   var contact = null;
   if (jsonContact['Id'] == undefined)
